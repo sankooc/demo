@@ -1,0 +1,19 @@
+.cell{
+    /*width:40px;
+    height:40px;*/
+    background-color: #ddd;
+    display: inline-block;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+.cell:hover{
+    border: 1px solid #222;
+}
+
+.cell.selected{
+    background-color: #A1D490;
+}
+
+.cell.pick{
+    background-color: #90C3D4;
+}
