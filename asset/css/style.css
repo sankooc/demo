@@ -1,6 +1,4 @@
 .cell{
-    /*width:40px;
-    height:40px;*/
     background-color: #ddd;
     display: inline-block;
     border: 1px solid #fff;
@@ -11,7 +9,15 @@
 }
 
 .cell.selected{
+    background-color: #D4A190;
+}
+
+.cell.select{
     background-color: #A1D490;
+}
+
+.cell.conflict{
+    background-color: #C390D4;
 }
 
 .cell.pick{

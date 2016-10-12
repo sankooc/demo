@@ -8,12 +8,11 @@ var _reactRouter = require('react-router');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Page = _react2.default.createClass({
+module.exports = _react2.default.createClass({
     _toRoom: function _toRoom() {
         var _uid = this.uid.value;
         var _mid = this.mid.value;
-        console.log(_mid);
-        _reactRouter.hashHistory.push('/room');
+        _reactRouter.hashHistory.push('/room/' + _mid + '/' + _uid);
     },
     render: function render() {
         var _this = this;
@@ -61,4 +60,3 @@ var Page = _react2.default.createClass({
         );
     }
 });
-module.exports = Page;

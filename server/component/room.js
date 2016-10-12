@@ -1,17 +1,14 @@
 import React from 'react';
 import io from 'socket';
 import reqwest from 'reqwest'
-import {hashHistory} from 'react-router';
 import _ from 'lodash'
 
 function _socket(url,option){
-    var socket = io(url);
+    const socket = io(url);
     socket.on('connect', function() {
         socket.emit('sub', option);
-        console.log('connected');
     });
     socket.on('disconnect', function() {
-        console.log('disconnected');
     });
     return socket;
 }
@@ -35,21 +32,32 @@ module.exports = React.createClass({
         const socket = _socket('http://localhost:3001',this.props.params);
         socket.on('movie/update',(info) =>{
             const state = this.state;
-            state.selected = info;
+            state.selected = info.data || {};
+            state.select = info.user || {};
             this.setState(state)
         });
     },
     _pick(x,y){
-        var state = this.state.pick;
+        const state = this.state.pick;
         return _.findIndex(state, {x,y});
     },
+    _select(x,y){
+        const state = this.state.select;
+        return _check(state,x,y);
+    },
     _selected(x,y){
-        var state = this.state.selected;
+        const state = this.state.selected;
         return _check(state,x,y);
     },
     _cell_style(x,y){
         if(this._pick(x,y) >=0){
+            if(this._selected(x,y)){
+                return 'cell conflict';
+            }
             return 'cell pick'
+        }
+        if(this._select(x,y)){
+            return 'cell select';
         }
         if(this._selected(x,y)){
             return 'cell selected';
@@ -61,19 +69,19 @@ module.exports = React.createClass({
         if(!target.classList.contains('cell')){
             return;
         }
-        var x = parseInt(target.dataset.x);
-        var y = parseInt(target.dataset.y);
-        if(this._selected(x,y)){
-            return;
-        }
-        var pick = this.state.pick;
-        var inx = this._pick(x,y);
+        const x = parseInt(target.dataset.x);
+        const y = parseInt(target.dataset.y);
+        const pick = this.state.pick;
+        const inx = this._pick(x,y);
         if(inx>=0){
             pick.splice(inx, 1);
         }else{
+            if(this._selected(x,y)){
+                return;
+            }
             pick.push({x,y});
         }
-        var state = this.state;
+        const state = this.state;
         this.setState(state)
     },
     _submit(){
@@ -90,7 +98,9 @@ module.exports = React.createClass({
                 state.pick = [];
                 this.setState(state)
             },
-            error: function(){}
+            error: function(res){
+                console.error(res);
+            }
         }
         reqwest(option);
     },
@@ -99,14 +109,26 @@ module.exports = React.createClass({
         state.pick = [];
         this.setState(state);
     },
+    _canSubmit(){
+        const pick = this.state.pick;
+        if(pick && pick.length){
+            for(let inx in pick){
+                if(this._selected(pick[inx].x,pick[inx].y)){
+                    return true;
+                }
+            }
+        }else{
+            return true;
+        }
+        return false;
+    },
     render() {
-        console.log('render');
         const {h,v} = this.props.meta;
         var _h = (100 / h) + '%';
         var _v = (100 / v) + '%';
         return <div className="container">
             <div className="row" style={{marginTop:"50px"}}>
-                <div style={{width:"400px",height:"400px",margin:"auto",padding:"0"}} onClick={this._toggle}>
+                <div style={{width:"440px",height:"440px",margin:"auto",padding:"0"}} onClick={this._toggle}>
                     {
                         _.times(h,(i) =>{
                             return <div className="cell-row">
@@ -119,7 +141,7 @@ module.exports = React.createClass({
                         })
                     }
                     <div>
-                        <button className="btn btn-primary" onClick={this._submit}>预定</button>
+                        <button className="btn btn-primary" onClick={this._submit} disabled={this._canSubmit()}>预定</button>
                         <button className="btn btn-warning" onClick={this._clean}>重置</button>
                     </div>
                 </div>
@@ -130,7 +152,7 @@ module.exports = React.createClass({
 });
 module.exports.defaultProps = {
     meta: {
-        h: 10
-        ,v: 10
+        h: 20
+        ,v: 20
     }
 };

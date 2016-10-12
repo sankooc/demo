@@ -1,12 +1,11 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
 
-const Page = React.createClass({
+module.exports = React.createClass({
     _toRoom(){
         var _uid = this.uid.value;
         var _mid = this.mid.value;
-        console.log(_mid);
-        hashHistory.push('/room');
+        hashHistory.push('/room/'+_mid+'/'+_uid);
     },
     render() {
         return <div className="container">
@@ -26,4 +25,3 @@ const Page = React.createClass({
         </div>;
     }
 });
-module.exports = Page;

@@ -12,7 +12,8 @@ exports.on = _eTable.on.bind(_eTable);
 exports.removeListener = _eTable.removeListener.bind(_eTable);
 
 var _connect = function (MongoClient) {
-    var _status, _db;
+    var _status = void 0,
+        _db = void 0;
     MongoClient.connect(url, function (err, db) {
         if (err) {
             _status = err;
@@ -35,13 +36,14 @@ function _mask(offset) {
 function _broadcast(mid) {
     var eName = mid;
     async.waterfall([function (callback) {
-        exports.status({ mid: mid }, callback);
+        exports.status({
+            mid: mid
+        }, callback);
     }, function (info, callback) {
         _eTable.emit(eName, info);
         callback(null, info);
-    }], function (err, info) {
-        console.log('do broadcast %s', eName);
-        console.dir(info);
+    }], function () {
+        //broadcast
     });
 }
 
@@ -52,10 +54,10 @@ function _create(option, callback) {
         var _option = _.pick(option, 'mid');
         exports.status(_option, callback);
     }, function (info, callback) {
-        if (_check(info, option.mask)) {
+        if (_check(info.data, option.mask)) {
             _batch(option, callback);
         } else {
-            callback('already');
+            callback('座位已被预订');
         }
     }, function (callback) {
         callback();
@@ -63,7 +65,7 @@ function _create(option, callback) {
     }], callback);
 }
 
-function _check(info, mask, callback) {
+function _check(info, mask) {
     var keys = Object.keys(mask);
     for (var i = 0; i < keys.length; i++) {
         var row = keys[i];
@@ -187,7 +189,10 @@ function _batch(option, callback) {
                 tid: tid
             };
             var modify = {
-                $setOnInsert: { tid: tid, uid: uid, mid: mid,
+                $setOnInsert: {
+                    tid: tid,
+                    uid: uid,
+                    mid: mid,
                     vinx: _mask(item.y),
                     hinx: item.x
                 }
@@ -205,7 +210,6 @@ function _batch(option, callback) {
                         callback('已经被占用');
                     } else {
                         callback();
-                        console.log('bakc');
                     }
                 } else {
                     callback('unknown');
@@ -220,7 +224,7 @@ exports.batch = function (option, callback) {
     _queue.push(option, callback);
 };
 
-exports.cancel = function (option, callback) {};
+exports.cancel = function () {};
 
 // function updateCache(db,callback){
 //     async.waterfall([function(callback) {
@@ -253,6 +257,41 @@ exports.cancel = function (option, callback) {};
 //     }], callback);
 // }
 
+// function _status(option, callback){
+//     async.waterfall([_connect, function(db, callback) {
+//         var collection = db.collection('ticket');
+//         var _project = {
+//             $project: {
+//                 mid: 1
+//                 ,uid:1
+//                 ,vinx:1
+//                 ,hinx:1
+//             }
+//         }
+//         var _match = {
+//             $match: _.pick(option,'uid','mid')
+//         }
+//         var _group = {
+//             $group: {
+//                 _id: {
+//                     uid: "uid"
+//                     ,row: "$hinx"
+//                 },
+//                 vmask: {
+//                     $sum: "$vinx"
+//                 }
+//             }
+//         }
+//         collection.aggregate([_project,_match,_group], callback);
+//     },function(result,callback){
+//         var _r = _.reduce(result,function(memo,item){
+//             memo[item._id] = item.vmask;
+//             return memo;
+//         },{});
+//         callback(null,_r);
+//     }], callback);
+// }
+
 exports.status = function (option, callback) {
     async.waterfall([_connect, function (db, callback) {
         var collection = db.collection('ticket');
@@ -269,7 +308,10 @@ exports.status = function (option, callback) {
         };
         var _group = {
             $group: {
-                _id: '$hinx',
+                _id: {
+                    uid: "$uid",
+                    row: "$hinx"
+                },
                 vmask: {
                     $sum: "$vinx"
                 }
@@ -277,43 +319,20 @@ exports.status = function (option, callback) {
         };
         collection.aggregate([_project, _match, _group], callback);
     }, function (result, callback) {
-        var _r = _.reduce(result, function (memo, item) {
-            memo[item._id] = item.vmask;
+        var _result = _.reduce(result, function (memo, item) {
+            var uid = item._id.uid;
+            var row = item._id.row;
+            var mask = item.vmask;
+            memo.data[row] = memo.data[row] || 0;
+            memo.data[row] += mask;
+            memo.user[uid] = memo.user[uid] || {};
+            memo.user[uid][row] = memo.user[uid][row] || 0;
+            memo.user[uid][row] += mask;
             return memo;
-        }, {});
-        callback(null, _r);
+        }, {
+            data: {},
+            user: {}
+        });
+        callback(null, _result);
     }], callback);
 };
-
-// var option = {
-//     mid: 'movie',
-//     uid: 'user4',
-//     vinx: 20,
-//     hinx: 20
-// }
-//
-// exports.on('movie',function(info){
-//     console.log('occur info');
-//     console.log(info);
-// });
-
-// _eTable.emit('movie', {d:1});
-
-// exports.status({mid:'movie'},function(err,ret){
-//     console.dir(JSON.stringify(ret));
-// });
-// exports.create(option,function(){
-//     console.dir(arguments);
-// });
-
-
-// var option = {
-//     mid: 'movie',
-//     uid: 'user4',
-//     items: [{x:9,y:10}]
-// }
-//
-//
-// exports.batch(option,function(){
-//     console.dir(arguments);
-// });

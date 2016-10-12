@@ -12,8 +12,6 @@ var _reqwest = require('reqwest');
 
 var _reqwest2 = _interopRequireDefault(_reqwest);
 
-var _reactRouter = require('react-router');
-
 var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
@@ -24,11 +22,8 @@ function _socket(url, option) {
     var socket = (0, _socket3.default)(url);
     socket.on('connect', function () {
         socket.emit('sub', option);
-        console.log('connected');
     });
-    socket.on('disconnect', function () {
-        console.log('disconnected');
-    });
+    socket.on('disconnect', function () {});
     return socket;
 }
 
@@ -53,7 +48,8 @@ module.exports = _react2.default.createClass({
         var socket = _socket('http://localhost:3001', this.props.params);
         socket.on('movie/update', function (info) {
             var state = _this.state;
-            state.selected = info;
+            state.selected = info.data || {};
+            state.select = info.user || {};
             _this.setState(state);
         });
     },
@@ -61,13 +57,23 @@ module.exports = _react2.default.createClass({
         var state = this.state.pick;
         return _lodash2.default.findIndex(state, { x: x, y: y });
     },
+    _select: function _select(x, y) {
+        var state = this.state.select;
+        return _check(state, x, y);
+    },
     _selected: function _selected(x, y) {
         var state = this.state.selected;
         return _check(state, x, y);
     },
     _cell_style: function _cell_style(x, y) {
         if (this._pick(x, y) >= 0) {
+            if (this._selected(x, y)) {
+                return 'cell conflict';
+            }
             return 'cell pick';
+        }
+        if (this._select(x, y)) {
+            return 'cell select';
         }
         if (this._selected(x, y)) {
             return 'cell selected';
@@ -81,14 +87,14 @@ module.exports = _react2.default.createClass({
         }
         var x = parseInt(target.dataset.x);
         var y = parseInt(target.dataset.y);
-        if (this._selected(x, y)) {
-            return;
-        }
         var pick = this.state.pick;
         var inx = this._pick(x, y);
         if (inx >= 0) {
             pick.splice(inx, 1);
         } else {
+            if (this._selected(x, y)) {
+                return;
+            }
             pick.push({ x: x, y: y });
         }
         var state = this.state;
@@ -110,7 +116,9 @@ module.exports = _react2.default.createClass({
                 state.pick = [];
                 _this2.setState(state);
             },
-            error: function error() {}
+            error: function error(res) {
+                console.error(res);
+            }
         };
         (0, _reqwest2.default)(option);
     },
@@ -119,10 +127,22 @@ module.exports = _react2.default.createClass({
         state.pick = [];
         this.setState(state);
     },
+    _canSubmit: function _canSubmit() {
+        var pick = this.state.pick;
+        if (pick && pick.length) {
+            for (var inx in pick) {
+                if (this._selected(pick[inx].x, pick[inx].y)) {
+                    return true;
+                }
+            }
+        } else {
+            return true;
+        }
+        return false;
+    },
     render: function render() {
         var _this3 = this;
 
-        console.log('render');
         var _props$meta = this.props.meta;
         var h = _props$meta.h;
         var v = _props$meta.v;
@@ -137,7 +157,7 @@ module.exports = _react2.default.createClass({
                 { className: 'row', style: { marginTop: "50px" } },
                 _react2.default.createElement(
                     'div',
-                    { style: { width: "400px", height: "400px", margin: "auto", padding: "0" }, onClick: this._toggle },
+                    { style: { width: "440px", height: "440px", margin: "auto", padding: "0" }, onClick: this._toggle },
                     _lodash2.default.times(h, function (i) {
                         return _react2.default.createElement(
                             'div',
@@ -152,7 +172,7 @@ module.exports = _react2.default.createClass({
                         null,
                         _react2.default.createElement(
                             'button',
-                            { className: 'btn btn-primary', onClick: this._submit },
+                            { className: 'btn btn-primary', onClick: this._submit, disabled: this._canSubmit() },
                             '预定'
                         ),
                         _react2.default.createElement(
@@ -168,7 +188,7 @@ module.exports = _react2.default.createClass({
 });
 module.exports.defaultProps = {
     meta: {
-        h: 10,
-        v: 10
+        h: 20,
+        v: 20
     }
 };
