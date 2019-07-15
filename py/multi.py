@@ -1,77 +1,9 @@
 # -*- coding:utf-8- -*-
-import akal 
+import mt 
 import os, sys
 import m3u8
 import requests
 from urllib import request, parse, error
-
-
-# fake_headers = {
-#     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',  # noqa
-#     'Accept-Charset': 'UTF-8,*;q=0.5',
-#     'Accept-Encoding': 'gzip,deflate,sdch',
-#     'Accept-Language': 'en-US,en;q=0.8',
-#     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0',  # noqa
-# }
-
-# def urlopen_with_retry(*args, **kwargs):
-#     retry_time = 3
-#     for i in range(retry_time):
-#         try:
-#             if insecure:
-#                 # ignore ssl errors
-#                 ctx = ssl.create_default_context()
-#                 ctx.check_hostname = False
-#                 ctx.verify_mode = ssl.CERT_NONE
-#                 return request.urlopen(*args, context=ctx, **kwargs)
-#             else:
-#                 return request.urlopen(*args, **kwargs)
-#         except socket.timeout as e:
-#             logging.debug('request attempt %s timeout' % str(i + 1))
-#             if i + 1 == retry_time:
-#                 raise e
-#         # try to tackle youku CDN fails
-#         except error.HTTPError as http_error:
-#             logging.debug('HTTP Error with code{}'.format(http_error.code))
-#             if i + 1 == retry_time:
-#                 raise http_error
-# def ungzip(data):
-#     """Decompresses data for Content-Encoding: gzip.
-#     """
-#     from io import BytesIO
-#     import gzip
-#     buffer = BytesIO(data)
-#     f = gzip.GzipFile(fileobj=buffer)
-#     return f.read()
-# def undeflate(data):
-#     """Decompresses data for Content-Encoding: deflate.
-#     (the zlib compression is used.)
-#     """
-#     import zlib
-#     decompressobj = zlib.decompressobj(-zlib.MAX_WBITS)
-#     return decompressobj.decompress(data)+decompressobj.flush()
-
-# def get_content(url, headers={}, decoded=True):
-#     req = request.Request(url, headers=headers)
-
-#     response = urlopen_with_retry(req)
-#     data = response.read()
-
-#     content_encoding = response.getheader('Content-Encoding')
-#     if content_encoding == 'gzip':
-#         data = ungzip(data)
-#     elif content_encoding == 'deflate':
-#         data = undeflate(data)
-
-#     # Decode the response body
-#     if decoded:
-#         charset = match1(response.getheader('Content-Type', ''), r'charset=([\w-]+)'
-#         )
-#         if charset is not None:
-#             data = data.decode(charset, 'ignore')
-#         else:
-#             data = data.decode('utf-8', 'ignore')
-#     return data
 
 def view (obj):
   print ('\n'.join(['%s:%s' % item for item in obj.__dict__.items()]))
@@ -90,12 +22,14 @@ def downM3u8(url, name, target, tmp):
     inx += 1
     d = {"url": _url, "duration": _duration, "target": _target}
     list.append(d)
-  akal.inQueue(list)
+  return list
 if __name__ == '__main__':
   curl = "https://bili.meijuzuida.com/20190630/19822_44a4b369/800k/hls/index.m3u8"
   target = '/Users/yj431/nrht'
   tmp = '/Users/yj431/temp'
-  downM3u8(curl, 'noch', target, tmp)
+  # mt.inQueue()
+  list = downM3u8(curl, 'noch', target, tmp)
+  mt.start(list)
     # print(segment.iframe_stream_info
   # resp = requests.get(curl)
   # content = resp.text
