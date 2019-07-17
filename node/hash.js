@@ -1,7 +1,7 @@
 
-const MASK = 0xfffffffff;
-const OFFSET = 0x1f;
 const _strCode = () => {
+  const MASK = 0xfffffffff;
+  const OFFSET = 0x1f;
   let code = 0;
   const ll = str.length
   for (let i = 0 ; i< ll ;i += 1) {
@@ -10,7 +10,7 @@ const _strCode = () => {
   }
   return code;
 }
-const hashcode = (str) => {
+const javahash = (str) => {
   const type = typeof str;
   switch (type) {
     case 'string':
@@ -24,3 +24,4 @@ const hashcode = (str) => {
   }
   return 0;
 }
+

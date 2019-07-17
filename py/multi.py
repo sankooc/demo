@@ -27,9 +27,11 @@ if __name__ == '__main__':
   curl = "https://bili.meijuzuida.com/20190630/19822_44a4b369/800k/hls/index.m3u8"
   target = '/Users/yj431/nrht'
   tmp = '/Users/yj431/temp'
+
+  mt._download('https://bili.meijuzuida.com/20190630/19822_44a4b369/800k/hls/aef7a4a7b3e000692.ts', '/Users/yj431/nrht/demo1.ts')
   # mt.inQueue()
-  list = downM3u8(curl, 'noch', target, tmp)
-  mt.start(list)
+  # list = downM3u8(curl, 'noch', target, tmp)
+  # mt.start(list)
     # print(segment.iframe_stream_info
   # resp = requests.get(curl)
   # content = resp.text

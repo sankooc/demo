@@ -1,12 +1,21 @@
 from queue import Queue
 import threading
-from urllib import request
+import requests
+import os
 
 queue = Queue()
 tsList = []
-
+userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'
 def _download(url, target):
-  pass
+  tmpFile = target + '.download'
+  if os.path.exists(target) is False:
+    if os.path.exists(tmpFile):
+      pass
+    else:
+      req = requests.get(url, stream=True)
+      with open(target, 'wb') as fd:
+        for chunk in req.iter_content(chunk_size=1024):
+            fd.write(chunk)
 def download():
   tname = threading.current_thread().name
   print(tname)
