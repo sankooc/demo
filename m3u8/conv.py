@@ -6,10 +6,15 @@ import time
 import requests
 import threading
 from urllib import request, parse, error
+from queue import Queue
+import threading
+from urllib import request
+import time
 
+queue = Queue()
+tsList = []
 
-def download(vname, url, headers, output):
-  print(vname, output)
+def download(url, headers, output):
   if os.path.exists(output):
     return
   _output = output + '.downloading'
@@ -34,29 +39,32 @@ def download(vname, url, headers, output):
     os.rename(_output, output)
 
 
-# def _rounding(m, d):
-#   videos = d['videos']
-#   print(d['main'])
-#   cp = datapath + '/' + d['vid']
-#   ts = []
-#   for index in range(len(videos)):
-#     video = videos[index]
-#     vpath = cp + '/v' + str(index)
-#     if os.path.exists(vpath) is False:
-#       os.makedirs(vpath)
-#     url = video['url']
-#     type = video['type']
-#     if type == 'mp4':
-#       output = vpath + '/video.mp4'
-#       headers = {}
-#       headers['Referer'] = 'http://www.wodedy.net/js/player/mp4.html'
-#       headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
-#       vname = d['vid'] + '#' + str(index)
-#       t = threading.Thread(target=download,args=(m, vname, url, headers, output))
-#       t.start()
-#       ts.append(t)
-#   for t in ts:
-#     t.join()
-  
+def polling(refer):
+  tname = threading.current_thread().name
+  while True:
+    size = queue.qsize()
+    if size == 0:
+      break
+    else:
+      item = queue.get()
+      # time.sleep(2)
+      url = item['url']
+      target = item['target']
+      if os.path.exists(target):
+        continue
+      print('thread %s: download %s' % (tname, url))
+      headers = {}
+      headers['Referer'] = refer
+      headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
+      download(url = url, headers = headers, output = target)
+def start(url, items = []):
+  for item in items:
+    queue.put(item)
+  for _ in range(2):
+    t = threading.Thread(target=polling, args=(url,)) 
+    t.start()
+    time.sleep(1)
+    tsList.append(t)
+  for t in tsList:
+    t.join()
     
-  
