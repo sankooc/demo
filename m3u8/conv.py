@@ -53,14 +53,19 @@ def polling(refer):
       if os.path.exists(target):
         continue
       print('thread %s: download %s' % (tname, url))
-      headers = {}
-      headers['Referer'] = refer
-      headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
-      download(url = url, headers = headers, output = target)
+      try:
+        headers = {}
+        headers['Referer'] = refer
+        headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'
+        download(url = url, headers = headers, output = target)
+      except:
+        queue.put({ "url": url, "target": target })
+        time.sleep(2)
+        
 def start(url, items = []):
   for item in items:
     queue.put(item)
-  for _ in range(2):
+  for _ in range(10):
     t = threading.Thread(target=polling, args=(url,)) 
     t.start()
     time.sleep(1)
