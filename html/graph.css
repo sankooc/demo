@@ -1,0 +1,7 @@
+body {
+  background-color: bisque;
+}
+canvas {
+  border: 1px dashed #ddd;
+  margin: auto;
+}
