@@ -961,17 +961,17 @@ S.ShapeBuilder = (function () {
 
       shapeContext.font = '50px serif';
       shapeContext.fillText('Hello world', 50, 90, 140);
-      // var s = 0;
+      var s = 0;
 
-      // setFontSize(fontSize);
-      // s = Math.min(fontSize,
-      //             (shapeCanvas.width / shapeContext.measureText(l).width) * 0.8 * fontSize, 
-      //             (shapeCanvas.height / fontSize) * (isNumber(l) ? 1 : 0.45) * fontSize);
-      // setFontSize(s);
+      setFontSize(fontSize);
+      s = Math.min(fontSize,
+                  (shapeCanvas.width / shapeContext.measureText(l).width) * 0.8 * fontSize, 
+                  (shapeCanvas.height / fontSize) * (isNumber(l) ? 1 : 0.45) * fontSize);
+      setFontSize(s);
 
-      // shapeContext.clearRect(0, 0, shapeCanvas.width, shapeCanvas.height);
-      // shapeContext.fillText(l, shapeCanvas.width / 2, shapeCanvas.height / 2);
-      // return processCanvas();
+      shapeContext.clearRect(0, 0, shapeCanvas.width, shapeCanvas.height);
+      shapeContext.fillText(l, shapeCanvas.width / 2, shapeCanvas.height / 2);
+      return processCanvas();
     },
 
     rectangle: function (w, h) {

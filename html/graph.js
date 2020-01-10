@@ -1,59 +1,71 @@
 
+const arr = [[10, 20], [80, 50], [80, 329], [140, 240]];
+const texts = ['123', '344', '324', '243', 'ccs', 'dsad', 'ewwq', 'e23'];
+const labels = (ctx) => {
+  const m = ctx.measureText('123');
+  console.log(m);
+};
+
 const onload = () => {
-  const arr = [[10, 20], [80, 50], [80, 329], [140, 240]];
   const canvas = document.getElementById('canvas');
   const { width, height } = canvas;
   const styles = () => {
-    return { mLine: 1, mColor: '#000', sLine: 0.7, sColor: '#777', num: 7 }
+    return { mLine: 1, mColor: '#000', sLine: 1, sColor: '#999', num: 7 }
   };
   const { mLine, mColor, sLine, sColor, num } = styles();
 
   const wh = 7;
   const hh = 7;
-
+  const pad = 25;
+  const off = 10;
   const ctx = canvas.getContext('2d');
+  // ctx.scale(0.5, 0.5);
+  // ctx.translate(50,50)
+  // ctx.transform(0.5, 0, 0, 1, 0, 0);
 
   ctx.fillStyle = '#fff';
-  ctx.fillRect(0,0,width,height);
+  ctx.fillRect(0, 0, width, height);
 
-  console.log([canvas]);
-  const iWidth = width - 40;
-  const iHeight = height - 40;
-  console.log(ctx);
+  const iWidth = width - 2 * (pad + off);
+  const iHeight = height - 2 * (pad + off);
+
   ctx.beginPath();
-  ctx.moveTo(20.5, 20);
-  ctx.lineTo(20.5, height - 10);
-  // ctx.font = "20px sans-serif"
+  ctx.moveTo(pad + off + 0.5, pad + off);
+  ctx.lineTo(pad + off + 0.5, height - pad);
   ctx.strokeStyle = mColor;
   ctx.lineWidth = mLine;
   ctx.stroke();
-  const wstep = iWidth / wh;
-  let wlast = 20;
+
+  ctx.moveTo(pad, height - pad - off + 0.5);
+  ctx.lineTo(width - off - pad, height - pad - off + 0.5);
+  ctx.strokeStyle = mColor;
+  ctx.lineWidth = mLine;
+  ctx.stroke();
+
+  const wstep = Math.round(iWidth / wh);
+  let wlast = pad + off + 0.5;
   for(let i = 0; i < wh; i += 1) {
     wlast += wstep;
     ctx.beginPath();
-    ctx.moveTo(wlast, 20);
-    ctx.lineTo(wlast, height - 10);
+    ctx.moveTo(wlast, pad + off);
+    ctx.lineTo(wlast, height - pad);
     ctx.strokeStyle = sColor;
     ctx.lineWidth = sLine;
     ctx.stroke();
   }
-  ctx.beginPath();
-  ctx.strokeStyle = mColor;
-  ctx.lineWidth = 1;
-  ctx.fillStyle = '#000';
-  ctx.fillRect(10, height - 20, width - 20 , 1);
-
-  const hstep = iHeight / hh;
-  let hlast = 20;
+  const hstep = Math.round(iHeight / hh);
+  let hlast = pad + off + 0.5;
   for(let i = 0; i < hh; i += 1) {
     hlast += hstep;
     ctx.beginPath();
-    ctx.strokeStyle = mColor;
-    ctx.lineWidth = 1;
-    ctx.fillStyle = '#000';
-    ctx.fillRect(10, height - hlast, width - 20 , 0.7);
+
+    ctx.moveTo(pad, height - hlast);
+    ctx.lineTo(width - off - pad, height - hlast);
+    ctx.strokeStyle = sColor;
+    ctx.lineWidth = sLine;
+    ctx.stroke();
   }
+  labels(ctx);
 };
 
 window.onload = onload;
