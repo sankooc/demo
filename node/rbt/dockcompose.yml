@@ -1,0 +1,19 @@
+cyc-api:
+    image: '260084713607.dkr.ecr.cn-north-1.amazonaws.com.cn/cyc-user:latest'
+    ports:
+        - '4000:4000'
+    volumes:
+        - './config/api:/root/config'
+cyc-ui:
+    image: '260084713607.dkr.ecr.cn-north-1.amazonaws.com.cn/cyc-ui:latest'
+    ports:
+        - '3030:3030'
+    volumes:
+        - './config/mobile:/root/config'
+    links:
+        - 'cyc-api:cyc-api'
+
+
+        api: http://cyc-api:4000
+mongoHost: 'mongodb://freezero:fzlk987@172.31.20.91,172.31.20.253,172.31.2.157/freezero?replicaSet=freezero'
+captchaEnable: true

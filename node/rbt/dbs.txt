@@ -1,0 +1,55 @@
+psql -h postgres-e4xcap8o.sql.tencentcdb.com -p 49677 -U yjadmin20 -d visitor
+YjAd24FA1@1AH
+psql -h postgres-e4xcap8o.sql.tencentcdb.com -p 49677 -U yjadmin20 -d yj_store_server
+
+
+http://visit.yunjiai.cn/app/validate?robot=YUNFAN-M2H3-00036&qrcode=9775e02e-45f4-4943-bd76-e1039243c7f0
+
+
+
+
+https://api.yunjichina.com.cn/openapi/v1/lift/list?buildingId=SXfVN9IX4Zy0WHBepRcmEELZZTKA5WUI_XJrkKPe5MTuRYzACnueyA==&lng=121.405933&lat=31.163946
+
+9|visitor  | {
+9|visitor  |   errMsg: 'getUserInfo:ok',
+9|visitor  |   rawData: '{"nickName":";Treasure","gender":1,"language":"zh_CN","city":"Baoding","province":"Hebei","country":"China","avatarUrl":"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKr9P59XlR3BLiazE4XH4VpFTS1X56Aiat15rlkkR013ic9SEDhHgAOjexMt9qL3SM3c8zDiagRJdVRicA/132"}',
+9|visitor  |   signature: '22d0be69b7cb1f010ce742fb9107f2b2620feda8',
+9|visitor  |   encryptedData: '93VxQ1jQaOZaA31Ei5kgJsbiw2QQB0AMg4BWkPtVt1j3kBcH0owO7/xnykQdr5nZ0ow6kBlcJZSR+uM69N6zsPn7il2JMDGYajoSLzjcd34TBSDcdS9uoY36Iv8Mudqz0WdhnFIDRX+Lz1ca7VSIT4UX/5G4Q+TPe2fn/bQctOC0o6zXDVd+mNXEwgHY4QmGXj9OsGBr17+rc+EsW9cOMLZIjDN8YQiKD1py3m1FIjCfjns959Kn5c78G9BN6O1Ll70ugXsUE83kCsgVnNBaQtPW9TLCV6S5nkOLCfjbavxaYM+WkYyu8Zr0kjxo29sNOstD6QE/o1cUT7RnG/cd+H5zmwG4Kzgotta1xMbBe3BD/VxcCqNP6DbozF6zO3hzyRuNUCyMRjljP5Pd+UMOg0s4i4kCTO90boBcfWjMUrjfHbvsPYeY4Lh1meESAe5RDFpNAKVj6+f2n9HZhAS7DNtfizY/Z7Z7FB/O+jDbyws=',
+9|visitor  |   iv: 'ok+lCwkb8sqqDB4aB98nCw==',
+9|visitor  |   userInfo: {
+9|visitor  |     nickName: ';Treasure',
+9|visitor  |     gender: 1,
+9|visitor  |     language: 'zh_CN',
+9|visitor  |     city: 'Baoding',
+9|visitor  |     province: 'Hebei',
+9|visitor  |     country: 'China',
+9|visitor  |     avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKr9P59XlR3BLiazE4XH4VpFTS1X56Aiat15rlkkR013ic9SEDhHgAOjexMt9qL3SM3c8zDiagRJdVRicA/132'
+9|visitor  |   }
+9|visitor  | }
+
+
+
+
+
+
+
+41 21 11 6 3 2
+
+INSERT INTO LIFTPRIVILEGE (OFFICE_FK, NAME)
+    VALUES (5, 'Gizmo Transglobal'), (6, 'Associated Computing, Inc')
+    ON CONFLICT (did) DO UPDATE SET dname = EXCLUDED.dname;
+
+————————————————
+版权声明：本文为CSDN博主「享耳小杰」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/guolanjiesxu/article/details/81937829
+
+
+
+
+
+
+SELECT * FROM INVITOR LEFT JOIN invitor_company ON invitor_company.INVITOR_ID = INVITOR.ID WHERE INVITOR.MOBILE='akb48' AND invitor_company.office_id=3;
+
+(SELECT * FROM INVITOR WHERE MOBILE='akb48') AS INVITOR
+
+SELECT * FROM (SELECT * FROM INVITOR WHERE MOBILE='akb48') AS INVITOR LEFT JOIN invitor_company ON invitor_company.INVITOR_ID = INVITOR.ID WHERE invitor_company.office_id=3;;

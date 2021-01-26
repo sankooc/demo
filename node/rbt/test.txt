@@ -1,0 +1,50 @@
+"{a: 12}"
+{"a": 12}
+
+
+
+http://portal.mp.yunjichina.com.cn/api/robots/qna/5a815947ab7529046d021f6e/dialog
+http://api.mp.yunjichina.com.cn/api/robots/qna/5a815947ab7529046d021f6e/dialog
+
+
+
+
+spring.kafka.bootstrap-servers=ckafka-7d7hj41s.ap-shanghai.ckafka.tencentcloudmq.com:6058
+# == provider ==
+spring.kafka.producer.retries=0
+spring.kafka.producer.batch-size=16384
+spring.kafka.producer.buffer-memory=33554432
+spring.kafka.producer.session-timeout-ms=3000
+spring.kafka.producer.acks=1
+spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.properties.security.protocol=SASL_PLAINTEXT
+spring.kafka.producer.properties.sasl.mechanism=PLAIN
+spring.kafka.producer.properties.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="ckafka-7d7hj41s#terminator" password="terminator";
+# == payment consumer ==
+spring.kafka.consumer.topic=payment
+spring.kafka.consumer.group-id=group_payment
+spring.kafka.consumer.auto-offset-reset=earliest
+spring.kafka.consumer.enable-auto-commit=true
+spring.kafka.consumer.auto-commit-interval-ms=1000
+spring.kafka.consumer.session-timeout-ms=3000
+spring.kafka.consumer.max-poll-records=100
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.properties.security.protocol=SASL_PLAINTEXT
+spring.kafka.consumer.properties.sasl.mechanism=PLAIN
+spring.kafka.consumer.properties.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="ckafka-7d7hj41s#terminator" password="terminator";
+
+
+
+
+
+
+ObjectId("5cf62ad0f5c1493484bbe86c"),ObjectId("5d0363c69329951bb767fed8"),ObjectId("5d60ef7607087c12148bf564"),ObjectId("5d6398b3e2cc7930431f09fd"),ObjectId("5d6876d781a84f0883a0b476"),ObjectId("5d68d432dae3060888bf4019"),ObjectId("5d6b6b012407a108ab5457de"),ObjectId("5d6e0b728f51572b8e14f9d7"),ObjectId("5d6e0bc6166e9728aa674e59"),ObjectId("5d6e0c646605d128e290154c"),ObjectId("5d73294b22814052093656ba"),ObjectId("5d73296566bde651cc0b4cf5"),ObjectId("5d73297f2281405209365aa2"),ObjectId("5d8077856ed34b3d0e034184"),ObjectId("5d80779f6ed34b3d0e03457e"),ObjectId("5d8af8b932ba671f7ea88890"),ObjectId("5d8af8f132ba671f7ea88cc9"),ObjectId("5d8c86daad95497847ccf1cd"),ObjectId("5d8cc7fad476f960a80ef3c1"),ObjectId("5d8cc98ed476f960a80eff3b"),ObjectId("5d8f47a3d476f960a815c348"),ObjectId("5d8f47bed476f960a815c779"),ObjectId("5d90918cebdfe14dc62f92e5"),ObjectId("5db65396e4e4e9205538b93b"),ObjectId("5db95c73102c5c0ba1f56fba"),ObjectId("5dc5306b72e5355582456802"),
+
+ObjectId("5cf62ad0f5c1493484bbe86c"),ObjectId("5d0363c69329951bb767fed8"),ObjectId("5d60ef7607087c12148bf564"),ObjectId("5d6398b3e2cc7930431f09fd"),ObjectId("5d6876d781a84f0883a0b476"),ObjectId("5d68d432dae3060888bf4019"),ObjectId("5d6b6b012407a108ab5457de"),ObjectId("5d6e0b728f51572b8e14f9d7"),ObjectId("5d6e0bc6166e9728aa674e59"),ObjectId("5d6e0c646605d128e290154c"),ObjectId("5d73294b22814052093656ba"),ObjectId("5d73296566bde651cc0b4cf5"),ObjectId("5d73297f2281405209365aa2"),ObjectId("5d8077856ed34b3d0e034184"),ObjectId("5d80779f6ed34b3d0e03457e"),ObjectId("5d8af8b932ba671f7ea88890"),ObjectId("5d8af8f132ba671f7ea88cc9"),ObjectId("5d8c86daad95497847ccf1cd"),ObjectId("5d8cc7fad476f960a80ef3c1"),ObjectId("5d8cc98ed476f960a80eff3b"),ObjectId("5d8f47a3d476f960a815c348"),ObjectId("5d8f47bed476f960a815c779"),ObjectId("5d90918cebdfe14dc62f92e5"),ObjectId("5db65396e4e4e9205538b93b"),ObjectId("5db95c73102c5c0ba1f56fba"),ObjectId("5dc5306b72e5355582456802"),
+
+
+
+
+<div id="layer-97" class="layer layer-BF8F3CCC-7365-4035-A094-DF338D81F914 selected" data-index="97" percentage-width="66.4%" percentage-height="24.6%" data-width="498px" data-height="390px" style="left: 64.5px; top: 232px; width: 249px; height: 195px;"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><b class="et h"></b><b class="er v"></b><b class="eb h"></b><b class="el v"></b></div>

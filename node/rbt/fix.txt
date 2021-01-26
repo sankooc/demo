@@ -1,0 +1,48 @@
+
+
+
+
+cd cyc-mobile
+git pull origin master
+git submodule update --init --recursive
+docker build -t cyc-ui .
+docker tag cyc-ui:latest 260084713607.dkr.ecr.cn-north-1.amazonaws.com.cn/cyc-ui:latest
+docker push 260084713607.dkr.ecr.cn-north-1.amazonaws.com.cn/cyc-ui:latest
+
+
+
+
+
+
+
+http://console.yunjiai.cn/stores/5a5d7179b9d36648efcea700 http://console.yunjiai.cn/stores/5abb505db6007e5242441db3 http://console.yunjiai.cn/stores/5da9321976e6ab68e5f5021b http://console.yunjiai.cn/stores/5dba3c67102c5c0ba1fa33ed
+
+
+
+
+http://console.yunjiai.cn/stores/5a9ce7211f05f34a38f0de02 http://console.yunjiai.cn/stores/5d90beebebdfe14dc6300a31 http://console.yunjiai.cn/stores/5d9ea3e53abd767499db49e6
+http://console.yunjiai.cn/stores/5d087be413f22c6a8c6fb447 http://console.yunjiai.cn/stores/5d087ff313f22c6a8c6fb80b
+http://console.yunjiai.cn/stores/5d35548240cae81ad58316aa http://console.yunjiai.cn/stores/5dd8dc27cfad25351a03e9f3
+http://console.yunjiai.cn/stores/5dae5de5cdbf0702e052928d http://console.yunjiai.cn/stores/5db2a14de4e4e920552d495f
+http://console.yunjiai.cn/stores/5d91c5640fec373ab9b45f7e http://console.yunjiai.cn/stores/5dafd4ff5c10254dcc219971
+http://console.yunjiai.cn/stores/5d01d7f1dec8052274d69b52 http://console.yunjiai.cn/stores/5d50df45f9416c5f124d1136
+http://console.yunjiai.cn/stores/5d0307656af0517b1c4bb277 http://console.yunjiai.cn/stores/5db3d48ae4e4e92055329fee
+http://console.yunjiai.cn/stores/5bd2dbedcbcb70627ec60088 http://console.yunjiai.cn/stores/5cedfe2ed6ef6f53d09b733e
+
+
+
+15|statistic  | 2020-06-30T16:00:00.000Z
+15|statistic  | 2020-07-06T16:00:00.000Z
+15|statistic  | pay
+15|statistic  | undefined
+15|statistic  | true
+
+6|acms  | 2020-06-30T16:00:00.000Z
+6|acms  | 2020-07-07T15:59:59.999Z
+6|acms  | pay
+6|acms  | undefined
+6|acms  | intime
+6|acms  | true
+
+
+db.flatstats.aggregate({ $match: { payment_at: { $gte: ISODate("2020-10-01T16:31:31Z") } } }, { $group: {_id: '$store_id', count: { $sum: 1 } } })

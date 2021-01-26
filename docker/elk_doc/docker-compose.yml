@@ -1,0 +1,37 @@
+version: "3.2"
+services:
+    elasticsearch:
+      image: docker.elastic.co/elasticsearch/elasticsearch:7.4.2
+      environment:
+        - discovery.type=single-node
+        - bootstrap.memory_lock=true
+        - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      ports:
+        - 9200:9200
+        - 9300:9300
+      volumes:
+        - ./elastic_data:/usr/share/elasticseasrch/data
+        - ./elastic_plugin:/usr/share/elasticsearch/plugins
+    kibana:
+        image: docker.elastic.co/kibana/kibana:7.4.2
+        ports:
+          - "5601:5601"
+        links:
+          - elasticsearch
+        depends_on:
+        - elasticsearch
+    apm:
+      image: elastic/apm-server:7.4.2
+      ports:
+        - 8200:8200
+      volumes:
+        - ./apm-server.yml:/usr/share/apm-server/apm-server.yml
+      depends_on:
+        - elasticsearch
+        - kibana
+    logstash:
+      image: elastic/logstash:7.4.2
+      ports:
+        - 5050:5050/udp
+      volumes:
+        - ./logstash.conf:/usr/share/logstash/pipeline/b1.cfg

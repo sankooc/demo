@@ -25,3 +25,29 @@ const k = { let: { ss: "$_id" }, pipeline: [{ $match: { $expr: { $and:[{ $eq: ["
 // const condi = {
 //   $lookup: 
 // }
+
+{
+  getCmdLineOpts: 1,
+  lsid: {
+    id: Binary { sub_type: 4, buffer: [Buffer [Uint8Array]], position: 16 }
+  },
+  '$db': 'admin'
+}
+{
+  argv: [
+    '/usr/local/opt/mongodb-community/bin/mongod',
+    '--config',
+    '/usr/local/etc/mongod.conf'
+  ],
+  parsed: {
+    config: '/usr/local/etc/mongod.conf',
+    net: { bindIp: '127.0.0.1' },
+    storage: { dbPath: '/usr/local/var/mongodb' },
+    systemLog: {
+      destination: 'file',
+      logAppend: true,
+      path: '/usr/local/var/log/mongodb/mongo.log'
+    }
+  },
+  ok: 1
+}

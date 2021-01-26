@@ -1,0 +1,104 @@
+ssh ec2-user@54.223.200.144 -i ci-server.pem //登录ci服务器
+cd cyc-api // 核心服务代码cd cyc-api
+... // 代码修改
+docker build -t cyc-user . // 构建镜像
+docker tag cyc-user:latest 260084713607.dkr.ecr.cn-north-1.amazonaws.com.cn/cyc-user:latest
+docker push 260084713607.dkr.ecr.cn-north-1.amazonaws.com.cn/cyc-user:latest //上传镜像
+
+cd ~ && sh prod2 //登录生产服务器
+cd cyc && sh boot.sh // 部署
+
+
+ssh ec2-user@54.223.200.144 -i .ssh/ci-server.pem
+
+
+
+
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92a32ba671f7ea88f35
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92a32ba671f7ea88f30
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92a32ba671f7ea88f39
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d94049f50ce952399f26eec
+
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d98023d8eedde6a0724c108
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d98023e8eedde6a0724c114
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d98023e8eedde6a0724c126
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892ac
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892b2
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892b7
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892bc
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892c0
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892c5
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892ca
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892cf
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892d4
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892d8
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892dd
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892e2
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892e7
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892ec
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892f1
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892f6
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea892fb
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea89300
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea89304
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea89309
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea8930d
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea89312
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d8af92c32ba671f7ea89317
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d98023e8eedde6a0724c132
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d98023f8eedde6a0724c14a
+http://console.yunjiai.cn/stores/5d8af92332ba671f7ea88f21/goods/5d9802408eedde6a0724c159
+
+
+
+
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/
+
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a97288eedde6a072adfe3
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a97288eedde6a072adfe7
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a97288eedde6a072adfeb
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a97288eedde6a072adfef
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a97288eedde6a072adff3
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a97288eedde6a072adff7
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a97288eedde6a072adffb
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a97288eedde6a072adfff
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a97288eedde6a072ae003
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a97288eedde6a072ae007
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972a8eedde6a072ae33c
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972a8eedde6a072ae340
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972a8eedde6a072ae344
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972b8eedde6a072ae348
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972c8eedde6a072ae567
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972c8eedde6a072ae56b
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972c8eedde6a072ae56f
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972c8eedde6a072ae573
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972c8eedde6a072ae577
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972c8eedde6a072ae57b
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972c8eedde6a072ae57f
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972c8eedde6a072ae583
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972c8eedde6a072ae587
+http://console.yunjiai.cn/stores/5d9a971f8eedde6a072adfca/goods/5d9a972c8eedde6a072ae58b
+
+
+$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for
+
+ %h - - %^[%d:%t %^] "%r" %s %b
+ 212.64.58.84 - - [11/Dec/2019:18:32:56 +0800] "GET /openapi/stores/getStoreNameByContainer?cno=383639303132303430313035323238 HTTP/1.1" 200 135 "-" "Apache-HttpClient/4.5.8 (Java/1.8.0_131)" "-"
+ 
+
+
+
+
+
+
+
+
+
+db.transactions.aggregate({ $match: {  "data.result_code": "SUCCESS", amount: { $lt: 0 } }}, {$group: { _id: '$order', sum: { $sum: 1 }, at: { $first:  '$at' } }}, {$match: {sum: { $gt: 1 }}}, { $sort: { at: -1 } })
+
+
+
+
+db.transactions.find({ order: ObjectId("5e1482ae9929ee7890089b1d"), "data.result_code": "SUCCESS" })

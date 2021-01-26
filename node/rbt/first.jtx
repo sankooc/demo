@@ -1,0 +1,11 @@
+{
+  require: ['items', 'date', 'moment', '_'],
+  sheets: [
+    {
+      name: '结算单',
+      offset: '2 3',
+      headers: [],
+      content: ['$item.p | currency', ''],
+    }
+  ],
+}

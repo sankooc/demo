@@ -1,0 +1,32 @@
+店铺(store)
+  - 创建
+  - 注销
+  - 克隆
+  - 基础信息编辑
+  - 运营数据设置
+  - 运营数据导出
+  - access 统计
+  - access 分类
+  - access 优惠
+  - access 订单
+  - access 月报
+  - access 任务
+  - access 机器人
+  - access 货柜
+  - access 地点
+  - access 工位
+  - access 场景
+  - access 操作员
+  - access 推广员
+  - access QNA
+  - access 补货管理
+商品
+  - 创建商品
+  - 删除商品
+  - 基础信息编辑
+  - 上下架
+  - 修改库存和类型
+分类
+  - 创建
+  - 修改
+  - 删除
